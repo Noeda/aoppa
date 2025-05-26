@@ -67,7 +67,7 @@ memmem(const void *in,   size_t in_len,
   {
     if(what_len > in_len)
       return NULL;
-    p = memchr(in, *(unsigned char *)what, in_len);
+    p = (void*) memchr(in, *(unsigned char *)what, in_len);
     if(!p)
       return NULL;
     in_len -= (unsigned char *)p - (unsigned char *)in;
@@ -83,7 +83,7 @@ memmem(const void *in,   size_t in_len,
 
 #ifndef HAVE_STRNDUP
 char *
-strndup(const char *in, unsigned int in_len)
+strndup(const char *in, size_t in_len)
 {
   char *res;
 

@@ -33,6 +33,14 @@
 #include "misc.h"
 #include "parser.h"
 
+// %%%
+// 25May2025 Mikko Hack: unistd.h for close()
+//
+// (I don't remember if windows has a unistd.h but if it doesn't, this
+// breaks Windows build.). Then again this file also imports sys/mman.h and
+// stuff so it likely isn't Windows-friendly anyway.
+// %%%
+#include <unistd.h>
 
 int
 parse_file(int patch, int type, const char *fn)

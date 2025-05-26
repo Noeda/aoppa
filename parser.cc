@@ -668,7 +668,13 @@ parse_reqs(unsigned char *data, size_t len, std::list<req_t> *reqlist, int cnt, 
         reqlist->push_back(req);
       else
         havereq = 1;
-      req = (req_t){reqnum++, rhook, skill, count, op, 0};
+      // %%%
+      // 25May2025 Mikko hack to compile with modern browsers:
+      // uint32_t -> int with static_cast
+      //
+      // Needed to do this for 'skill', 'count' and 'op'.
+      // %%%
+      req = (req_t){reqnum++, rhook, static_cast<int>(skill), static_cast<int>(count), static_cast<int>(op), 0};
     }
   }
   if(havereq)

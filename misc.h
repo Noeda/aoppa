@@ -54,7 +54,7 @@ void * memmem(const void *, size_t, const void *, size_t);
 #endif /* !HAVE_MEMMEM */
 
 #ifndef HAVE_STRNDUP
-char * strndup(const char *, unsigned int);
+char * strndup(const char *, size_t);
 #endif /* !HAVE_STRNDUP */
 
 #ifndef HAVE_ASPRINTF

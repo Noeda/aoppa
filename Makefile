@@ -22,15 +22,25 @@ aoppa: $(OBJ)
 clean:
 	rm -f $(OBJ) aoppa $(PLUGINS) core
 
+# %%%
+# 25May2025 Mikko Hack: Compile parser.o into the plugins as well to fix linker
+# issues.
+#
+# I don't think it's intended to be this way (ideally the code for
+# handle_item() would be pulled form the executable that the .so plugins would
+# use) but this was quickest and easiest way to make this compile.
+# %%%
+MIKKO_HACK_SRC_FOR_PLUGINS := parser.cc misc.c
+
 ## plugins
 input-mmap.so: input-mmap.cc
-	$(CXX) $(SOFLAGS) $(CXXFLAGS) -o $@ $?
+	$(CXX) $(SOFLAGS) $(CXXFLAGS) $(MIKKO_HACK_SRC_FOR_PLUGINS) -o $@ $?
 
 input-gzip.so: input-gzip.cc
-	$(CXX) $(SOFLAGS) $(CXXFLAGS) -o $@ $? -lz
+	$(CXX) $(SOFLAGS) $(CXXFLAGS) $(MIKKO_HACK_SRC_FOR_PLUGINS) -o $@ $? -lz
 
 output-xml.so: output-xml.cc
-	$(CXX) $(SOFLAGS) $(CXXFLAGS) -o $@ $?
+	$(CXX) $(SOFLAGS) $(CXXFLAGS) $(MIKKO_HACK_SRC_FOR_PLUGINS) -o $@ $?
 
 output-ign.so: output-ign.cc
-	$(CXX) $(SOFLAGS) $(CXXFLAGS) -o $@ $?
+	$(CXX) $(SOFLAGS) $(CXXFLAGS) $(MIKKO_HACK_SRC_FOR_PLUGINS) -o $@ $?

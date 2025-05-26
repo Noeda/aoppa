@@ -1,0 +1,11 @@
+# Build artifacts or irrelevant system files
+.DS_Store
+*.o
+*dSYM
+
+# Build outputs
+aoppa
+*.so
+*.dylib
+*.dll
+
